@@ -11,7 +11,8 @@ E.	Si el importe final con descuento suma más de $120  se debe sumar un 10% de 
 function CalcularPrecio () 
 {
     const { cant, marca } = obtenerDatos();
-    var precioFinal;
+    var precioFinal = 0;
+    var iibb = 0;
     if (cant >= 6) {
         //50% descuento
         precioFinal = obtenerPrecioFinal(cant, 0.5);
@@ -49,7 +50,14 @@ function CalcularPrecio ()
     if (cant < 3) {
         precioFinal = obtenerPrecioFinal(cant);
     }
-    document.getElementById('txtIdprecioDescuento').value = precioFinal;
+    if (precioFinal > 120) {
+        iibb = precioFinal * 0.1;
+        precioFinal = precioFinal + iibb
+    }
+    if (iibb != 0) {
+        alert("IIBB Usted pago " + iibb.toFixed(2));
+    }
+    document.getElementById('txtIdprecioDescuento').value = precioFinal.toFixed(2);
 }
 function obtenerDatos()
 {
